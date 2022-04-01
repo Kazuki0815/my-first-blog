@@ -39,3 +39,19 @@
 html, body {
     height: 100%;
 }
+
+.wrapper{
+    width: 100%;
+    position: relative;
+    min-height: 100%;
+}
+
+.inner{
+    padding-bottom:200px; 
+}
+
+footer{
+    height:200px;
+    position:absolute;
+    bottom:0;
+}
