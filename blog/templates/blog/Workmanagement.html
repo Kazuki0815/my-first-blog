@@ -99,14 +99,30 @@
                 <h6>以下のボタンを押して記録します</h6>
                 <br>
                 <button class="btn btn-primary btn-block btn-lg" type="button">開始</button>
+                {% now "SHORT_DATETIME_FORMAT" %}
                 <br>
                 <button class="btn btn-danger btn-block btn-lg" type="button">終了</button>
                 <br>
-                <button class="btn btn-outline-secondary btn-lg" type="button">回答を入力</button>
-                <br><br>
-                <button class="btn btn-sm btn-primary">送信</button>
-              </div>
+                <!--<button class="btn btn-outline-secondary btn-lg" type="button">回答を入力</button>
+                #<br><br>
+                <button class="btn btn-sm btn-primary">送信</button>-->
+                <ul>
+                  {% for task in todo_items %}
+                  <li>
+                    {{task.content}}
+                    <form action='/delete/{{task.id}}' method='POST'>{% csrf_token %}
+                      <button type="submit" value="delete" class="btn btn-sm btn-danger">削除</button>
+                    </form>
+                  </li>
+                  {% endfor %}
+                </ul>
+                <form action='/todo_post/' method='POST'>{% csrf_token %}
+                    <p><label>備考欄<br><input type="text" name="content" class="btn btn-outline-secondary btn-lg" type="button" placeholder="回答を入力"></label></p>
+                    <button type="submit" value="add" class="btn btn-sm btn-primary">送信</button>
+                </form>
+            </div>
         </main>
+
     </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

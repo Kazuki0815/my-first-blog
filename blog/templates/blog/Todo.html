@@ -1,0 +1,14 @@
+<h1>todo list</h1>
+
+<ul>
+    {% for task in todo_items %}
+    <li>
+      {{task.content}}
+    </li>
+    {% endfor %}
+</ul>
+
+<form action='/todo_post/' method='POST'>{% csrf_token %}
+<input type="text" name="content">
+<input type="submit" name="送信">
+</form>

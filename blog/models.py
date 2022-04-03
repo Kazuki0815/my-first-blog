@@ -1,3 +1,4 @@
+from importlib.resources import contents
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
@@ -16,3 +17,8 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+    
+class Todo(models.Model):
+    content = models.TextField()
+    #click_time = models.DateTimeField(default=timezone.now)
+    
