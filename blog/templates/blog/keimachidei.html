@@ -23,7 +23,7 @@
         </div>
         <div class="col-12 col-md-5 col-lg-8 d-flex align-items-center justify-content-md-end mt-3 mt-md-0">
             <div class="mr-3 mt-1">
-                <a class="github-button" href="/Officemanagement/keimachidei" data-color-scheme="no-preference: dark; light: light; dark: light;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star /themesberg/simple-bootstrap-5-dashboard">京町デイ事業所</a>
+                <a class="github-button" href="" data-color-scheme="no-preference: dark; light: light; dark: light;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star /themesberg/simple-bootstrap-5-dashboard">京町デイ事業所</a>
             </div>
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
@@ -52,7 +52,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" aria-current="page" href="/Officemanagement">
+                      <a class="nav-link active" aria-current="page" href="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                         <span class="ml-2">事務所管理</span>
                       </a>
@@ -76,7 +76,7 @@
                       </a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link active" href="">
+                      <a class="nav-link" href="/Workmanagement">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart-2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
                         <span class="ml-2">勤務管理機能</span>
                       </a>
@@ -94,79 +94,66 @@
             <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">ダッシュボード</a></li>
-                <li class="breadcrumb-item active" aria-current="page">勤務管理機能</li>
+                <li class="breadcrumb-item"><a href="/Officemanagement">事務所管理</a></li>
+                <li class="breadcrumb-item active" aria-current="page">京町デイ</li>
             </ol>
             </nav>
+            
             <!--<h1 class="h2">ダッシュボード</h1>
             <p>This is the homepage of a simple admin interface which is part of a tutorial written on Themesberg</p>-->
-            <div class="d-grid gap-2">
-                <h5>以下のボタンを押して記録します</h5>
-                <h6>{{ user.username }}さん</h6>
-                <br>
-                <!--<ul>
-                  {% for task_2 in Timesheet_items %}
-                    <li>
-                      {{task_2.start}}
-                    </li>
-                  {% endfor %}
-                </ul>-->
-                <p>{{ comment }}</p>
-                <!--<form action='/start_time/' method='POST'>{% csrf_token %}-->
-                <form action='/result/' method='POST'>{% csrf_token %}
-                  <button type="submit" value="add" class="btn btn-primary btn-block btn-lg">開始</button>
-                  <!--<button class="btn btn-primary btn-block btn-lg" type="button">開始</button>-->
-                </form>
-               
-                <br>
-                <p>{{ comment_2 }}</p>
-                <form action='/result_2/' method='POST'>{% csrf_token %}
-                  <button type="submit" value="add" class="btn btn-danger btn-block btn-lg">終了</button>
-                </form>
-                <br>
-                <!--<button class="btn btn-outline-secondary btn-lg" type="button">回答を入力</button>
-                #<br><br>
-                <button class="btn btn-sm btn-primary">送信</button>-->
-                
-                <ul>
-                  {% for task in todo_items %}
-                  <li>
-                    {{task.content}}
-                    <!--{{task.id}}
-                    {{task.created_date}}-->
-                    <form action='/delete/{{task.id}}' method='POST'>{% csrf_token %}
-                      <button type="submit" value="delete" class="btn btn-sm btn-danger">削除</button>
-                    </form>
-                  </li>
-                  {% endfor %}
-                </ul>
-                <form action='/todo_post/' method='POST'>{% csrf_token %}
-                    <p><label>備考欄<br><input type="text" name="content" class="btn btn-outline-secondary btn-lg" type="button" placeholder="回答を入力"></label></p>
-                    <button type="submit" value="add" class="btn btn-sm btn-primary">送信</button>
-                </form>
-            </div>
-            <br>
-            <div>
-            <table border="1">
-              {% for datas in data %}              
-                <tr>
-                  <th>No.</th>
-                  <td>{{ datas.id }}&nbsp;&nbsp;</td>
-                  <td>{{ datas.staff }}&nbsp;&nbsp;</td>
-                  <td>{{ datas.place }}</td>
-                  <th>事業所</th><br>
-                  <td>&nbsp;&nbsp;{{ datas.in_out }}&nbsp;&nbsp;</td>
-                  <td>{{ datas.date }}</td>
-                  <td>{{ datas.time }}</td>
-                  
-                </tr>
-              {% endfor %}
-            </table>
-            <form action='/list/' method='POST'>{% csrf_token %}
-              <button type="submit" value="add" class="btn btn-primary">一覧を表示</button>
-            </form>
-            </div>
-        </main>
 
+            <div class="row">
+              <div class="col-12 col-xl-8 mb-4 mb-lg-0">
+                  <div class="card">
+                      <h5 class="card-header">勤務日誌の項目 詳細</h5>
+                      <div class="card-body">
+                          <div class="table-responsive">
+                              <table class="table">
+                                  <thead>
+                                    <tr>
+                                      <th scope="col"></th>
+                                      <th scope="col">京町デイ</th>
+                                      <th scope="col">時間帯</th>
+                                      <th scope="col">時間</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+                                      <th scope="row">1</th>
+                                      <td>日勤</td>
+                                      <td>08:30～17:00</td>
+                                      <td>7.5h</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">2</th>
+                                      <td>調理</td>
+                                      <td>10:30～12:30</td>
+                                      <td>2h</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">3</th>
+                                      <td>AM</td>
+                                      <td>08:30～12:15</td>
+                                      <td>3.75h</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">4</th>
+                                      <td>PM</td>
+                                      <td>13:15～17:00</td>
+                                      <td>3.75h</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                          </div>
+                            <a href="detail_keimachidei" class="btn btn-block btn-primary">詳細設定</a>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-12 col-xl-4">
+              </div>
+            </div>
+
+        </main>
     </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

@@ -1,0 +1,12 @@
+{% extends "five/base.html" %}
+{% block content %}
+<header>
+    <div>
+    {% if user.is_authenticated %}
+    <p>{{ user.username }}さん <a href="{% url 'login' %}">アイズケアログイン画面</a></p>
+    {% else %}
+    <p><a href="{% url 'login' %}">アイズケアログイン画面</a></p>
+    {% endif %}
+    </div>
+  </header>
+{% endblock %}

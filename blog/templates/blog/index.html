@@ -23,15 +23,19 @@
         </div>
         <div class="col-12 col-md-5 col-lg-8 d-flex align-items-center justify-content-md-end mt-3 mt-md-0">
             <div class="mr-3 mt-1">
-                <a class="github-button" href="Officemanagement" data-color-scheme="no-preference: dark; light: light; dark: light;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star /themesberg/simple-bootstrap-5-dashboard">京町デイ事業所</a>
+                <a class="github-button" href="Officemanagement/keimachidei/" data-color-scheme="no-preference: dark; light: light; dark: light;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star /themesberg/simple-bootstrap-5-dashboard">京町デイ事業所</a>
             </div>
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-                  Aurora test さん
+                  {% if user.is_authenticated %}
+                  {{ user.username }}さん
+                  {% else %}
+                  <a href="{% url 'login' %}">ログイン</a>
+                  {% endif %}
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                   <li><a class="dropdown-item" href="#">設定</a></li>
-                  <li><a class="dropdown-item" href="#">Sign out</a></li>
+                  <li><a class="dropdown-item" href="{% url 'login' %}">ログアウト</a></li><!---追加-->
                 </ul>
               </div>
         </div>

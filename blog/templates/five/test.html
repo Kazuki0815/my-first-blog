@@ -1,0 +1,228 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>アイズケアログイン</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/sab.css' %}">
+    <script src="https://kit.fontawesome.com/d86c726e71.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-light p-3">
+        <div class="d-flex col-12 col-md-3 col-lg-2 mb-2 mb-lg-0 flex-wrap flex-md-nowrap justify-content-between">
+            <a class="navbar-brand" href="">
+                (株)アイズケア
+            </a>
+            <button class="navbar-toggler d-md-none collapsed mb-3" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="col-12 col-md-4 col-lg-2">
+            <input class="form-control form-control-dark" type="text" placeholder="Search" aria-label="Search">
+        </div>
+        <div class="col-12 col-md-5 col-lg-8 d-flex align-items-center justify-content-md-end mt-3 mt-md-0">
+            <div class="mr-3 mt-1">
+            </div>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
+                  Aurora test さん
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <li><a class="dropdown-item" href="#">設定</a></li>
+                  <li><a class="dropdown-item" href="#">ログアウト</a></li><!---追加あとsearch調べる-->
+                </ul>
+              </div>
+        </div>
+    </nav>
+    <div class="container-fluid">
+    <div class="row">
+        <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+            <div class="position-sticky pt-md-5">
+            </div>
+        </nav>
+        
+        <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
+          <header>
+            <div>
+            {% if user.is_authenticated %}
+            <p>{{ user.username }}さん <a href="{% url 'login' %}">ログアウト</a></p>
+            {% else %}
+            <p><a href="{% url 'login' %}">ログイン</a></p>
+            {% endif %}
+            </div>
+          </header>
+        </main>
+    </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+</body>
+</html>
+<!--<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
+    <title>OFFICE54</title>
+    <link rel="stylesheet" href="{% static 'five/common.css' %}">
+    <script src="https://kit.fontawesome.com/d86c726e71.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <div>
+            <p>OFFICE</p>
+        </div>
+        <div>
+            {% if user.is_authenticated %}
+            <p>{{ user.username }}さん。    <a href="{% url 'login' %}">ログアウト</a></p><!--logout-->
+         <!--   {% else %}
+            <p><a href="{% url 'login' %}">ログイン</a></p>
+            {% endif %}
+        </div>
+    </header>
+
+    <div id="wrapper">
+      <nav id="nav-left">
+        <div id="nav">
+          <ul id="nav-ul">
+            <li class="nav-li"><a href="{% url 'login' %}" class="nav-li-a"><i class="fa fa-tachometer" style="margin-right:15px"></i>Dashboard</a></li>
+            <li class="nav-li"><a href="#" class="nav-li-a"><i class="fas fa-list" style="margin-right:15px"></i>App1</a></li>
+              {% if user.is_authenticated %}
+              <li class="nav-li"><a href="#" class="nav-li-a"><i class="fas fa-server" style="margin-right:15px"></i>User Settings</a></li>
+              {% endif %}
+          </ul>
+        </div>
+      </nav>
+      <main id="main">
+          {% block content %}
+          {% endblock %}
+      </main>
+    </div>
+</body>
+</html>-->
+<header>
+    <div>
+        <p>OFFICE</p>
+    </div>
+    <div>
+        {% if user.is_authenticated %}
+        <p>{{ user.username }}さん。    <a href="{% url 'login' %}">ログアウト</a></p><!--logout-->
+        {% else %}
+        <p><a href="{% url 'login' %}">ログイン</a></p>
+        {% endif %}
+    </div>
+  </header>
+
+  
+
+# Create your views here.
+#class IndexView(LoginRequiredMixin, View):
+#def get(request):#def get(self, request):
+#    form = TimesheetForm
+#    context = {
+#        'form': form,
+#        "user": request.user,
+#    }
+#    return render(request, 'blog/2index.html', context)
+#index_3 = IndexView.as_view()
+
+#class ResultView(View):
+#def ResultView(request):
+#    form = TimesheetForm(request.POST)
+#    now = datetime.now()
+#    month = now.month
+#    day = now.day
+#    hour = now.hour
+#    minute = now.minute
+
+#    obj = form.save(commit=False)
+#    obj.place = request.POST["place"]
+#    obj.in_out = request.POST["in_out"]
+#    obj.staff = request.user
+#    obj.date = datetime.now().date()x
+#    obj.time = datetime.now().time()
+#    obj.save()
+#    if request.POST["in_out"] == '1':
+#        comment = str(month) + "月" + str(day) +"日" + str(hour) + "時" + str(minute) + "分\n" + "出勤確認しました。今日も頑張りましょう！"
+#    else:
+#        comment = str(month) + "月" + str(day) +"日" + str(hour) + "時" + str(minute) + "分\n" + "退勤確認しました。お疲れ様でした(^-^)!"
+#    context = {
+#        'place': Timesheet.PLACES[int(obj.place)-1][1],
+#        'comment': comment,
+#    }
+#    return render(request, 'blog/result.html', context)
+#    return render(request, 'blog/result.html')
+#result = ResultView.as_view()
+
+#class IndexView(LoginRequiredMixin, View):
+def get(request):
+    form = TimesheetForm
+    context = {
+        'form': form,
+        "user": request.user,
+    }
+    return render(request, 'blog/2index.html', context)
+#index_2 = IndexView.as_view()
+
+def Timesheetapp(request):
+    Timesheet_items = Timesheet.objects.all()
+    #if request.method == "POST":
+    form = TimesheetForm(request.POST)
+    now = datetime.now()
+    month = now.month
+    day = now.day
+    hour = now.hour
+    minute = now.minute
+    
+    if form.is_valid():
+        form.save()
+
+
+#    obj = form.save(commit=False)
+#    obj.place = request.POST["place"]
+#    obj.in_out = request.POST["in_out"]
+#    obj.staff = request.user
+#    obj.date = datetime.now().date()
+#    obj.time = datetime.now().time()
+#    obj.save()
+#    if request.POST["in_out"] == '1':
+#        comment = str(month) + "月" + str(day) +"日" + str(hour) + "時" + str(minute) + "分\n" + "出勤確認しました。今日も頑張りましょう！"
+#    else:
+#        comment = str(month) + "月" + str(day) +"日" + str(hour) + "時" + str(minute) + "分\n" + "退勤確認しました。お疲れ様でした(^-^)!"
+#    context = {
+#        'place': Timesheet.PLACES[int(obj.place)-1][1],
+#        'comment': comment,
+#    }
+#    return render(request, 'blog/result.html', context)
+#    return render(request, 'blog/result.html')
+    
+   
+    #obj = form.save
+    #obj.place = request.POST["place"]
+    #obj.in_out = request.POST["in_out"]
+    #obj.staff = request.user
+    #obj.date = datetime.now().date()
+    #obj.time = datetime.now().time()
+    #obj.save()
+    #Timesheet_items.staff
+    #Timesheet_items.place
+    #Timesheet_items.in_out
+    #Timesheet_items.time
+    #Timesheet_items.date
+    #{% endfor %}
+    #user_name = Timesheet.staff
+    if Timesheet.in_out == 1:
+        comment = str(month) + "月" + str(day) +"日" + str(hour) + "時" + str(minute) + "分\n" + "出勤確認しました。今日も頑張りましょう！"
+    else:
+        comment = str(month) + "月" + str(day) +"日" + str(hour) + "時" + str(minute) + "分\n" + "退勤確認しました。お疲れ様でした(^-^)!"
+    context = {
+        'comment': comment,
+        'place': Timesheet.place,
+    }
+    #return render(request, 'blog/result.html', context)
+    #返信用
+    #return render(request, 'blog/Workmanagement.html',context)koko
+    #return render(request, 'blog/result.html',{'Timesheet_items':Timesheet_items})
+    return render(request, 'blog/result.html', context)
+    #return render(request, 'blog/Workmanagement.html',{'Timesheet_items':Timesheet_items})

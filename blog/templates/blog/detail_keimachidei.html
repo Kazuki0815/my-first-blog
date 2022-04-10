@@ -1,0 +1,50 @@
+{% extends 'blog/base.Officemanagement.html' %}
+{% block content %}
+<div class="row">
+    <div class="col-12 col-xl-8 mb-4 mb-lg-0">
+        <div class="card">
+            <h5 class="card-header">勤務日誌の項目 詳細</h5>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <th scope="row">名称</th>
+                            <td>日勤</td>
+                            <td><a href="#" class="btn btn-sm btn-primary">変更</a></td>
+                            <td></td>
+                          </tr>
+                          <tr>
+                            <th scope="row">時間</th>
+                            <td>09:00 時 ～ 16:00 時</td>
+                            <td><a href="#" class="btn btn-sm btn-primary">変更</a></td>
+                            <td></td>
+                          </tr>
+                          <tr>
+                            <th scope="row">合計時間</th>
+                            <td>7.5 時間</td>
+                            <td><a href="#" class="btn btn-sm btn-primary">変更</a></td>
+                            <td></td>
+                          </tr>
+                          <tr>
+                            <th scope="row">食事</th>
+                            <td>☑朝食 ☑昼食 □夕食</td>
+                            <td><a href="#" class="btn btn-sm btn-primary">変更</a></td>
+                            <td></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+{% endblock %}

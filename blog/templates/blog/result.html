@@ -1,0 +1,20 @@
+{% extends 'blog/2base.html' %}
+{% block content %}
+    <p>出勤場所：{{ place }}</p>
+    {{ user.username }}
+    <p>{{ comment }}</p>
+    
+    {{context}}
+    {% for Timesheet in Timesheet_items %}
+        {{ Timesheet.staff }}<br>
+        {{ Timesheet.place }}<br>
+        {{ Timesheet.in_out }}<br>
+        {{ Timesheet.time }}<br>
+        {{ Timesheet.date }}<br>
+    {% endfor %}
+    <div class="post">
+        <div class="date">
+        </div>
+    </div>
+    <a href="../accounts/logout">ログアウト</a>
+{% endblock  %}
