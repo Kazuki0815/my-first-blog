@@ -23,7 +23,7 @@
         </div>
         <div class="col-12 col-md-5 col-lg-8 d-flex align-items-center justify-content-md-end mt-3 mt-md-0">
             <div class="mr-3 mt-1">
-                <a class="github-button" href="keimachidei" data-color-scheme="no-preference: dark; light: light; dark: light;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star /themesberg/simple-bootstrap-5-dashboard">京町デイ事業所</a>
+                <a class="github-button" href="#" data-color-scheme="no-preference: dark; light: light; dark: light;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star /themesberg/simple-bootstrap-5-dashboard">{{ user.employee.office_name }}</a>
             </div>
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
@@ -57,20 +57,8 @@
                         <span class="ml-2">事務所管理</span>
                       </a>
                     </li>
-                    <!--<li class="nav-item">
-                      <a class="nav-link" href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
-                        <span class="ml-2">ユーザー管理</span>
-                      </a>
-                    </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-                        <span class="ml-2">勤務管理機能</span>
-                      </a>
-                    </li>-->
-                    <li class="nav-item">
-                      <a class="nav-link" href="#">
+                      <a class="nav-link" href="/Usermanagement">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                         <span class="ml-2">ユーザー管理</span>
                       </a>
@@ -81,12 +69,6 @@
                         <span class="ml-2">勤務管理機能</span>
                       </a>
                     </li>
-                    <!--<li class="nav-item">
-                      <a class="nav-link" href="#">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
-                        <span class="ml-2">Integrations</span>
-                      </a>
-                    </li>-->
                   </ul>
               </div>
         </nav>
@@ -101,6 +83,17 @@
             <p>This is the homepage of a simple admin interface which is part of a tutorial written on Themesberg</p>-->
             <div class="row">
               <div class="col-12 col-xl-8 mb-4 mb-lg-0">
+                <div class="card">
+                  <h5 class="card-header">事業所追加</h5>
+                  <div class="card-body">
+                      <form method="POST" class="post-form">{% csrf_token %}
+                          {{ form.as_p }}
+                          <button type="submit" class="save btn btn-primary">追加</button>
+                    </tr>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-xl-8 mb-4 mb-lg-0">
                   <div class="card">
                       <h5 class="card-header">事務所一覧</h5>
                       <div class="card-body">
@@ -109,30 +102,29 @@
                                   <thead>
                                     <tr>
                                       <th scope="col">事業所名</th>
+                                      <th scope="col">所属長</th>
                                       <th scope="col">詳細</th>
                                     </tr>
                                   </thead>
                                   <tbody>
+                                    {% for office in offices %}
                                     <tr>
-                                      <th>京町デイ</th>
-                                      <td><a href="keimachidei" class="btn btn-sm btn-primary">見る</a></td>
+                                      <th>{{ office.office_name }}</th>
+                                      <td>{{ office.office_manager }}</td>
+                                      <td>
+                                        {% if office.office_name == "京町デイ" %}
+                                          <a href="keimachidei" class="btn btn-sm btn-primary">見る</a>
+                                          <a href="#" class="btn btn-sm btn-primary">編集</a></td><!--エラー-->
+                                        {% elif office.office_name == "日夏デイ" %}
+                                          <a href="#" class="btn btn-sm btn-primary">見る</a>
+                                          <a href="#" class="btn btn-sm btn-primary">編集</a></td><!--テストオブジェクト指向-->
+                                        {% elif office.office_name == "甘呂デイ" %}
+                                        <a href="#" class="btn btn-sm btn-primary">見る</a>
+                                        <a href="#" class="btn btn-sm btn-primary">編集</a></td><!--テスト-->
+                                        {% endif %}
+                                      </td>
                                     </tr>
-                                    <tr>
-                                      <th>日夏デイ</th>
-                                      <td><a href="#" class="btn btn-secondary btn-sm">見る</a></td>
-                                    </tr>
-                                    <tr>
-                                      <th>甘呂デイ</th>
-                                      <td><a href="#" class="btn btn-secondary btn-sm">見る</a></td>
-                                    </tr>
-                                    <tr>
-                                      <th>ECC</th>
-                                      <td><a href="#" class="btn btn-secondary btn-sm">見る</a></td>
-                                    </tr>
-                                    <tr>
-                                      <th>わが家</th>
-                                      <td><a href="#" class="btn btn-secondary btn-sm">見る</a></td>
-                                    </tr>
+                                    {% endfor %}
                                   </tbody>
                                 </table>
                           </div>

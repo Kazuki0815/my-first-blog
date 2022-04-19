@@ -41,9 +41,7 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'todoapp',
     'Timesheetapp',
-    #'attendance.apps.AttendanceConfig',
-    #'accounts.app.AccountsConfig'
-    #'five.apps.FiveConfig',
+    'employee'
 ]
 
 MIDDLEWARE = [

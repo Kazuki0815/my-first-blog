@@ -1,0 +1,41 @@
+{% extends 'blog/Workmanagement.html' %}
+{% block content %}
+{% for datas in data %}              
+<tr>
+    {% if datas.date|date:"/n" == "/5" %}
+    <td>No.{{ datas.id }}</td>
+    <td>{{ datas.staff }}</td>
+    <td>
+    {% if datas.place == 1 %}
+    京町デイ
+    {% elif datas.place == 2 %}
+    日夏デイ
+    {% elif datas.place == 3 %}
+    甘呂デイ
+    {% elif datas.place == 4 %}
+    ECC
+    {% elif datas.place == 5 %}
+    わが家
+    {% else %}
+    その他
+    {% endif %}
+    </td>
+    <td>
+    {% if datas.in_out == 1 %}
+    出勤
+    {% else %}
+    退勤
+    {% endif %}
+    </td>
+    <td>
+    {{ datas.date }} {{ datas.time }}
+    </td>
+    {% endif %}
+</tr>
+{% endfor %}
+<form action='' method='POST'>{% csrf_token %}
+    <button type="submit" value="add" class="btn btn-primary">一覧を表示</button>
+  </form>
+  &nbsp;&nbsp;<a href="/Workmanagement/list" class="btn btn-primary">先月</a>
+  &nbsp;&nbsp;<a href="/Workmanagement/list" class="btn btn-primary">翌月</a>
+{% endblock %}

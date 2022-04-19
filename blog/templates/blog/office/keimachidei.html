@@ -70,7 +70,7 @@
                       </a>
                     </li>-->
                     <li class="nav-item">
-                      <a class="nav-link" href="#">
+                      <a class="nav-link" href="/Usermanagement">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                         <span class="ml-2">ユーザー管理</span>
                       </a>
@@ -112,13 +112,47 @@
                                   <thead>
                                     <tr>
                                       <th scope="col"></th>
-                                      <th scope="col">京町デイ</th>
-                                      <th scope="col">時間帯</th>
+                                      <th scope="col">開始</th>
+                                      <th scope="col"></th>
+                                      <th scope="col">終了</th>
                                       <th scope="col">時間</th>
+                                      <th scope="col">朝食</th>
+                                      <th scope="col">昼食</th>
+                                      <th scope="col">夕食</th>
                                     </tr>
                                   </thead>
                                   <tbody>
-                                    <tr>
+                                    {% for shift_items in shift_item %}
+                                      <tr>
+                                        <td>{{ shift_items.shift_name }}</td>
+                                        <td>{{ shift_items.working_starttime }}</td>
+                                        <td>～</td>
+                                        <td>{{ shift_items.working_endtime }}</td>
+                                        <td>{{ shift_items.total_time }}h</td>
+                                        <td>
+                                          {% if shift_items.breakfast == True %}
+                                          ☑
+                                          {% else %}
+                                          □
+                                          {% endif %}
+                                        </td>
+                                        <td>
+                                          {% if shift_items.lunch == True %}
+                                          ☑
+                                          {% else %}
+                                          □
+                                          {% endif %}
+                                        </td>
+                                        <td>
+                                          {% if shift_items.dinner == True %}
+                                          ☑
+                                          {% else %}
+                                          □
+                                          {% endif %}
+                                        </td>
+                                      </tr>
+                                    {% endfor %}
+                                    <!--<tr>
                                       <th scope="row">1</th>
                                       <td>日勤</td>
                                       <td>08:30～17:00</td>
@@ -141,7 +175,7 @@
                                       <td>PM</td>
                                       <td>13:15～17:00</td>
                                       <td>3.75h</td>
-                                    </tr>
+                                    </tr>-->
                                   </tbody>
                                 </table>
                           </div>

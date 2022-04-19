@@ -3,7 +3,6 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE-edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
     <title>アイズケアログイン</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
@@ -30,12 +29,12 @@
             {% if user.is_authenticated %}
             {{ user.username }}さん
             {% else %}
-            <a href="{% url 'login' %}">ログイン</a>
+            <a href="">ログイン</a>
             {% endif %}
           </button>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <li><a class="dropdown-item" href="#">設定</a></li>
-              <li><a class="dropdown-item" href="{% url 'login' %}">ログアウト</a></li><!---追加あとsearch調べる-->
+              <li><a class="dropdown-item" href="">ログアウト</a></li><!---追加あとsearch調べる-->
           </ul>
         </div>
     </div>
