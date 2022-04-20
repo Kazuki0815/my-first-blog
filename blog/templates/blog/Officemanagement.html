@@ -69,6 +69,12 @@
                         <span class="ml-2">勤務管理機能</span>
                       </a>
                     </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="Managerpage">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart-2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                        <span class="ml-2">管理者画面</span>
+                      </a>
+                    </li>
                   </ul>
               </div>
         </nav>
@@ -101,6 +107,7 @@
                               <table class="table">
                                   <thead>
                                     <tr>
+                                      <th scope="col">事業所No</th>
                                       <th scope="col">事業所名</th>
                                       <th scope="col">所属長</th>
                                       <th scope="col">詳細</th>
@@ -109,20 +116,10 @@
                                   <tbody>
                                     {% for office in offices %}
                                     <tr>
+                                      <td>{{ office.id }}</td>
                                       <th>{{ office.office_name }}</th>
                                       <td>{{ office.office_manager }}</td>
-                                      <td>
-                                        {% if office.office_name == "京町デイ" %}
-                                          <a href="keimachidei" class="btn btn-sm btn-primary">見る</a>
-                                          <a href="#" class="btn btn-sm btn-primary">編集</a></td><!--エラー-->
-                                        {% elif office.office_name == "日夏デイ" %}
-                                          <a href="#" class="btn btn-sm btn-primary">見る</a>
-                                          <a href="#" class="btn btn-sm btn-primary">編集</a></td><!--テストオブジェクト指向-->
-                                        {% elif office.office_name == "甘呂デイ" %}
-                                        <a href="#" class="btn btn-sm btn-primary">見る</a>
-                                        <a href="#" class="btn btn-sm btn-primary">編集</a></td><!--テスト-->
-                                        {% endif %}
-                                      </td>
+                                      <td><a href="{{ office.id }}" class="btn btn-sm btn-primary">見る</a></td>
                                     </tr>
                                     {% endfor %}
                                   </tbody>
@@ -136,6 +133,8 @@
                   <!-- Another widget will go here -->
               </div>
             </div>
+            {% block content %}
+            {% endblock %}
         </main>
     </div>
     </div>

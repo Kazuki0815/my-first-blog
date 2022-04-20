@@ -21,7 +21,7 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
-
+        
         <!--検索ボックス-->
         <div class="col-12 col-md-4 col-lg-2">
             <input class="form-control form-control-dark" type="text" placeholder="Search" aria-label="Search">
@@ -30,7 +30,7 @@
         <div class="col-12 col-md-5 col-lg-8 d-flex align-items-center justify-content-md-end mt-3 mt-md-0">
             <!--事業所リンク-->
             <div class="mr-3 mt-1">
-                <a class="github-button" href="" data-color-scheme="no-preference: dark; light: light; dark: light;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star /themesberg/simple-bootstrap-5-dashboard">京町デイ事業所</a>
+                <a class="github-button" href="/Officemanagement/keimachidei" data-color-scheme="no-preference: dark; light: light; dark: light;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star /themesberg/simple-bootstrap-5-dashboard">京町デイ事業所</a>
             </div>
             <!--ユーザー設定-->
             <div class="dropdown">
@@ -56,7 +56,6 @@
         <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
             <div class="position-sticky pt-md-5">
                 <ul class="nav flex-column">
-                  {% block saidbar %}
                     <li class="nav-item">
                         <a class="nav-link" href="/">
                           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
@@ -70,7 +69,7 @@
                       </a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="#">
+                      <a class="nav-link" href="/Usermanagement">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                         <span class="ml-2">ユーザー管理</span>
                       </a>
@@ -81,23 +80,86 @@
                         <span class="ml-2">勤務管理機能</span>
                       </a>
                     </li>
-                    {% endblock %}
                   </ul>
               </div>
         </nav>
         <!--中央-->
         <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
             <!--ナビ-->
-            {% block main %}
             <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">ダッシュボード</a></li>
                 <li class="breadcrumb-item"><a href="/Officemanagement">事務所管理</a></li>
-                <li class="breadcrumb-item active" aria-current="page">京町デイ</li>
+                <li class="breadcrumb-item"><a href="/Officemanagement/{{id}}/">{% if id == 1 %}
+                    京町デイ
+                    {% elif id == 2 %}
+                    日夏デイ
+                    {% elif id == 3 %}
+                    甘呂デイ
+                    {% elif id == 4 %}
+                    ECC
+                    {% else %}
+                    事業所の設定がされていません
+                    {% endif %}    </a></li><!--追加:事業所を自動で入るようにする-->
+                <li class="breadcrumb-item active" aria-current="page">詳細設定</li>
             </ol>
             </nav>
-            {% endblock %}
             <!--コンテンツ-->
+            {% block content %}
+            <div class="row">
+                <div class="col-12 col-xl-8 mb-4 mb-lg-0">
+                    <div class="card">
+                        <h5 class="card-header">勤務日誌項目の追加 詳細設定 
+                            {% if id == 1 %}
+                            京町デイ
+                            {% elif id == 2 %}
+                            日夏デイ
+                            {% elif id == 3 %}
+                            甘呂デイ
+                            {% elif id == 4 %}
+                            ECC
+                            {% else %}
+                            事業所の設定がされていません
+                            {% endif %}</h5>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th scope="col"></th>
+                                        <th scope="col"></th>
+                                        <th scope="col"></th>
+                                        <th scope="col"></th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                        <h6>
+                                            {% if id == 1 %}
+                                            京町デイ
+                                            {% elif id == 2 %}
+                                            日夏デイ
+                                            {% elif id == 3 %}
+                                            甘呂デイ
+                                            {% elif id == 4 %}
+                                            ECC
+                                            {% else %}
+                                            事業所の設定がされていません
+                                            {% endif %}
+                                          </h6>
+                                      <tr>
+                                        <form method="POST" class="post-form">{% csrf_token %}
+                                            {{ form.as_p }}
+                                            <button type="submit" class="save btn btn-primary">追加</button>
+                                        </form>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            {% endblock %}
         </main>
     </div>
     </div>

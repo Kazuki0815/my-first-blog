@@ -23,7 +23,7 @@
         </div>
         <div class="col-12 col-md-5 col-lg-8 d-flex align-items-center justify-content-md-end mt-3 mt-md-0">
             <div class="mr-3 mt-1">
-                <a class="github-button" href="#" data-color-scheme="no-preference: dark; light: light; dark: light;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star /themesberg/simple-bootstrap-5-dashboard">{{ user.employee.office_name }}</a>
+                <a class="github-button" href="" data-color-scheme="no-preference: dark; light: light; dark: light;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star /themesberg/simple-bootstrap-5-dashboard">京町デイ事業所</a>
             </div>
             <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
@@ -52,11 +52,23 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" aria-current="page" href="/Officemanagement">
+                      <a class="nav-link active" aria-current="page" href="">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
                         <span class="ml-2">事務所管理</span>
                       </a>
                     </li>
+                    <!--<li class="nav-item">
+                      <a class="nav-link" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
+                        <span class="ml-2">ユーザー管理</span>
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                        <span class="ml-2">勤務管理機能</span>
+                      </a>
+                    </li>-->
                     <li class="nav-item">
                       <a class="nav-link" href="/Usermanagement">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
@@ -64,17 +76,17 @@
                       </a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link active" href="">
+                      <a class="nav-link" href="/Workmanagement">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart-2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
                         <span class="ml-2">勤務管理機能</span>
                       </a>
                     </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="Managerpage">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart-2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
-                        <span class="ml-2">管理者画面</span>
+                    <!--<li class="nav-item">
+                      <a class="nav-link" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                        <span class="ml-2">Integrations</span>
                       </a>
-                    </li>
+                    </li>-->
                   </ul>
               </div>
         </nav>
@@ -82,133 +94,125 @@
             <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">ダッシュボード</a></li>
-                <li class="breadcrumb-item active" aria-current="page">勤務管理機能</li>
+                <li class="breadcrumb-item"><a href="/Officemanagement">事務所管理</a></li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    {% if id == 1 %}
+                    京町デイ
+                    {% elif id == 2 %}
+                    日夏デイ
+                    {% elif id == 3 %}
+                    甘呂デイ
+                    {% elif id == 4 %}
+                    ECC
+                    {% else %}
+                    事業所の設定がされていません
+                    {% endif %}                 
+                </li>
             </ol>
             </nav>
+            
             <!--<h1 class="h2">ダッシュボード</h1>
             <p>This is the homepage of a simple admin interface which is part of a tutorial written on Themesberg</p>-->
-            <div class="d-grid gap-2">
-                <h5>以下のボタンを押して記録します</h5>
-                <h6>{{ user.username }}さん</h6>
-                <br>
-                <!--<ul>
-                  {% for task_2 in Timesheet_items %}
-                    <li>
-                      {{task_2.start}}
-                    </li>
-                  {% endfor %}
-                </ul>-->
-                <p>{{ comment }}</p>
-                <!--<form action='/start_time/' method='POST'>{% csrf_token %}-->
-                <form action='/result/' method='POST'>{% csrf_token %}
-                  <button type="submit" value="add" class="btn btn-primary btn-block btn-lg">開始</button>
-                  <!--<button class="btn btn-primary btn-block btn-lg" type="button">開始</button>-->
-                </form>
-               
-                <br>
-                <p>{{ comment_2 }}</p>
-                <form action='/result_2/' method='POST'>{% csrf_token %}
-                  <button type="submit" value="add" class="btn btn-danger btn-block btn-lg">終了</button>
-                </form>
-                <br>
-                <!--<button class="btn btn-outline-secondary btn-lg" type="button">回答を入力</button>
-                #<br><br>
-                <button class="btn btn-sm btn-primary">送信</button>-->
-                
-                <ul>
-                  {% for task in todo_items %}
-                  <li>
-                    {{task.content}}
-                    <!--{{task.id}}
-                    {{task.created_date}}-->
-                    <form action='/delete/{{task.id}}' method='POST'>{% csrf_token %}
-                      <button type="submit" value="delete" class="btn btn-sm btn-danger">削除</button>
-                    </form>
-                  </li>
-                  {% endfor %}
-                </ul>
-                <form action='/todo_post/' method='POST'>{% csrf_token %}
-                    <p><label>備考欄<br><input type="text" name="content" class="btn btn-outline-secondary btn-lg" type="button" placeholder="回答を入力"></label></p>
-                    <button type="submit" value="add" class="btn btn-sm btn-primary">送信</button>
-                </form>
-            </div>
-            <br>
-            <br>
+
             <div class="row">
               <div class="col-12 col-xl-8 mb-4 mb-lg-0">
                   <div class="card">
-                      <h5 class="card-header">勤務記録一覧</h5>
+                      <h5 class="card-header">勤務日誌の項目 詳細 {% if id == 1 %}
+                        京町デイ
+                        {% elif id == 2 %}
+                        日夏デイ
+                        {% elif id == 3 %}
+                        甘呂デイ
+                        {% elif id == 4 %}
+                        ECC
+                        {% else %}
+                        事業所の設定がされていません
+                        {% endif %}</h5>
                       <div class="card-body">
                           <div class="table-responsive">
                               <table class="table">
                                   <thead>
                                     <tr>
                                       <th scope="col"></th>
-                                      <th scope="col">ユーザー</th>
-                                      <th scope="col">事業所名</th>
-                                      <th scope="col">出勤/退勤</th>
-                                      <th scope="col">打刻時間</th>
+                                      <th scope="col">開始</th>
+                                      <th scope="col"></th>
+                                      <th scope="col">終了</th>
+                                      <th scope="col">時間</th>
+                                      <th scope="col">朝食</th>
+                                      <th scope="col">昼食</th>
+                                      <th scope="col">夕食</th>
                                     </tr>
                                   </thead>
-                                  <tbody border="1">
-                                    <!--<header>
+                                  <tbody>
+                                    {% for shift_items in shift_item %}
                                       <tr>
-                                        <th>事業所名</th>
-                                        <th>(1)出勤/退勤(0)</th>
-                                      </tr>
-                                    </header>-->
-                                    {% block content %}
-                                    {% for datas in data %}              
-                                      <tr>
-                                        {% if datas.date|date:"/n" == "/4" %}
-                                        <td>No.{{ datas.id }}</td>
-                                        <td>{{ datas.staff }}</td>
+                                        {% if shift_items.office_id_test == id %}
+                                        <td>{{ shift_items.shift_name }}</td>
+                                        <td>{{ shift_items.working_starttime }}</td>
+                                        <td>～</td>
+                                        <td>{{ shift_items.working_endtime }}</td>
+                                        <td>{{ shift_items.total_time }}h</td>
                                         <td>
-                                          {% if datas.place == 1 %}
-                                          京町デイ
-                                          {% elif datas.place == 2 %}
-                                          日夏デイ
-                                          {% elif datas.place == 3 %}
-                                          甘呂デイ
-                                          {% elif datas.place == 4 %}
-                                          ECC
-                                          {% elif datas.place == 5 %}
-                                          わが家
+                                          {% if shift_items.breakfast == True %}
+                                          ☑
                                           {% else %}
-                                          その他
+                                          □
                                           {% endif %}
                                         </td>
                                         <td>
-                                          {% if datas.in_out == 1 %}
-                                          出勤
+                                          {% if shift_items.lunch == True %}
+                                          ☑
                                           {% else %}
-                                          退勤
+                                          □
                                           {% endif %}
                                         </td>
                                         <td>
-                                          {{ datas.date }} {{ datas.time }}
+                                          {% if shift_items.dinner == True %}
+                                          ☑
+                                          {% else %}
+                                          □
+                                          {% endif %}
                                         </td>
                                         {% endif %}
                                       </tr>
                                     {% endfor %}
-                                  <form action='/Workmanagement/list' method='POST'>{% csrf_token %}
-                                    <button type="submit" value="add" class="btn btn-primary">一覧を表示</button>
-                                  </form>
-                                  &nbsp;&nbsp;<a href="/Workmanagement/list_2" class="btn btn-primary">先月</a>
-                                  &nbsp;&nbsp;<a href="/Workmanagement/list_2" class="btn btn-primary">翌月</a>
-                                  {% endblock %}
-                                  </div>
+                                    <!--<tr>
+                                      <th scope="row">1</th>
+                                      <td>日勤</td>
+                                      <td>08:30～17:00</td>
+                                      <td>7.5h</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">2</th>
+                                      <td>調理</td>
+                                      <td>10:30～12:30</td>
+                                      <td>2h</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">3</th>
+                                      <td>AM</td>
+                                      <td>08:30～12:15</td>
+                                      <td>3.75h</td>
+                                    </tr>
+                                    <tr>
+                                      <th scope="row">4</th>
+                                      <td>PM</td>
+                                      <td>13:15～17:00</td>
+                                      <td>3.75h</td>
+                                    </tr>-->
                                   </tbody>
                                 </table>
                           </div>
+                          <a href="detail_setteing" class="btn btn-block btn-primary">詳細設定</a>
+                            <!--<a href="/Officemanagement/keimachidei/detail_keimachidei" class="btn btn-block btn-primary">詳細設定</a>-->
                       </div>
                   </div>
               </div>
+              <div class="col-12 col-xl-4">
+              </div>
             </div>
-            <div>
-            
-        </main>
 
+        </main>
     </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

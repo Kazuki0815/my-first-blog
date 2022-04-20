@@ -21,7 +21,7 @@ class TimesheetForm(forms.ModelForm):
 class KyoumachideiForm(forms.ModelForm):
     class Meta:
         model = Kyoumachidei
-        fields = ('shift_name', 'working_starttime','working_endtime','total_time','breakfast','lunch','dinner')
+        fields = ('shift_name', 'working_starttime','working_endtime','total_time','breakfast','lunch','dinner','office_id_test')
         
 class employeeForm(forms.ModelForm):
     class Meta:

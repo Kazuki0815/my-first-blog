@@ -6,6 +6,7 @@ from datetime import datetime
 from django.utils import timezone
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
+from django.shortcuts import  get_object_or_404
 
 
 #ログイン
@@ -55,6 +56,27 @@ def detail_keimachidei(request):
     #form = KyoumachideiForm()
     #return render(request, 'blog/detail_keimachidei.html', {'form': form})
     #return render(request, 'blog/detail_keimachidei.html')
+
+def detail_office(request, id):
+    shift_item = Kyoumachidei.objects.all()
+    number = len(shift_item)
+    params = {'shift_item': shift_item,
+              'id':id,
+              'number':number,
+              }
+    return render(request, 'blog/detail_office.html', params)
+
+def detail_setteing(request,id):
+    #pk = get_object_or_404(Offices, pk=pk)
+    if request.method == "POST":
+        form = KyoumachideiForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.save()
+            #return redirect('keimachidei')
+    else:
+        form = KyoumachideiForm()
+    return render(request, 'blog/detail_setteing.html', {'form': form,'id':id})
 
 #ユーザー管理
 def Usermanagement(request):
@@ -167,3 +189,13 @@ def Managerpage(request):
         'data': data,
     }
     return render(request, 'blog/Managerpage.html',context)
+
+def detail_Managerpage(request,id):
+    data = Timesheet.objects.all()
+    users = User.objects.all()
+    context = {
+        'users':users,
+        'data': data,
+        'id':id,
+    }
+    return render(request, 'blog/detail_Managerpage.html',context)
