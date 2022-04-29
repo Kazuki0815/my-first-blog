@@ -1,0 +1,80 @@
+{% extends 'blog/base/base.html' %}
+
+{% block main %}
+<main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
+    <div class="row">
+      <div class="col-12 col-xl-8 mb-4 mb-lg-0">
+          <div class="card">
+              <h5 class="card-header">勤務日誌の項目 詳細 {% if id == 1 %}
+                京町デイ
+                {% elif id == 2 %}
+                日夏デイ
+                {% elif id == 3 %}
+                甘呂デイ
+                {% elif id == 4 %}
+                ECC
+                {% else %}
+                事業所の設定がされていません
+                {% endif %}</h5>
+              <div class="card-body">
+                  <div class="table-responsive">
+                      <table class="table">
+                          <thead>
+                            <tr>
+                              <th scope="col"></th>
+                              <th scope="col">開始</th>
+                              <th scope="col"></th>
+                              <th scope="col">終了</th>
+                              <th scope="col">時間</th>
+                              <th scope="col">朝食</th>
+                              <th scope="col">昼食</th>
+                              <th scope="col">夕食</th>
+                              <th scope="col">アクション</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {% for shift_item in shift_items %}
+                              <tr>
+                                {% if shift_item.office_id_test_2.id == id %}
+                                <td>{{ shift_item.shift_name }}</td>
+                                <td>{{ shift_item.working_starttime }}</td>
+                                <td>～</td>
+                                <td>{{ shift_item.working_endtime }}</td>
+                                <td>{{ shift_item.total_time }}h</td>
+                                <td>
+                                  {% if shift_item.breakfast == True %}
+                                  ☑
+                                  {% else %}
+                                  □
+                                  {% endif %}
+                                </td>
+                                <td>
+                                  {% if shift_item.lunch == True %}
+                                  ☑
+                                  {% else %}
+                                  □
+                                  {% endif %}
+                                </td>
+                                <td>
+                                  {% if shift_item.dinner == True %}
+                                  ☑
+                                  {% else %}
+                                  □
+                                  {% endif %}
+                                </td>
+                                <td><a href="/officemanagement/{{ shift_item.id }}/shift_details_setteing" class="btn btn-sm btn-primary">編集</a></td>
+                                {% endif %}
+                              </tr>
+                            {% endfor %}
+                          </tbody>
+                        </table>
+                  </div>
+                  <a href="add_shift_item" class="btn btn-block btn-primary">詳細設定</a>
+              </div>
+          </div>
+      </div>
+      <div class="col-12 col-xl-4">
+      </div>
+    </div>
+</main>
+{% endblock %}

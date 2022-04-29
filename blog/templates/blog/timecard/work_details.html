@@ -1,0 +1,23 @@
+{% extends 'blog/base/base.html' %}
+
+{% block main %}
+<main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
+    <nav aria-label="breadcrumb">
+    </nav>
+    <div class="d-grid gap-2">
+        <form method='POST' class="post-form">{% csrf_token %}
+            <p>合計時間:保留</p>
+            <p>備考欄:{{form.remarks}}</p>
+            <p>シフト:{{form.shift_name}}</p>
+            <p>残業時間:{{form.overtime_hours}}</p>
+            <button type="submit" class="save btn btn-primary">保存</button>
+        </form>
+        {{user.manager.office_name}}
+        {% for shift_items in shift_item %}
+        {% if user.manager.office_name == shift_items.office_id_test_2 %}
+        <p>{{ shift_items.shift_name }}</p>
+        {% endif %}
+        {% endfor %}
+    </div>            
+</main>
+{% endblock %}

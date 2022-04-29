@@ -1,0 +1,48 @@
+{% extends 'blog/base/base.html' %}
+
+{% block main %}
+<main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
+    <div class="row">
+        <div class="col-12 col-xl-8 mb-4 mb-lg-0">
+            <div class="card">
+                <h5 class="card-header">勤務日誌項目の編集 詳細設定</h5>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <h6></h6>
+                                <tr>
+                                <form method="POST" class="post-form">{% csrf_token %}
+                                    <p>名称 : {{ form.shift_name }}</p>
+                                    <p>開始時間 : {{ form.working_starttime }}</p>
+                                    <p>終了時間 : {{ form.working_endtime }}</p>
+                                    <p>合計時間 : {{ form.total_time }}</p>
+                                    <p>朝食 : {{ form.breakfast }}</p>
+                                    <p>昼食 : {{ form.lunch }}</p>
+                                    <p>夕食 : {{ form.dinner }}</p>
+                                    <!--<input type="hidden" name="office_id_test" value="{{id}}">-->
+                                    <button type="submit" class="save btn btn-primary">保存</button>
+                                </form>
+                                <br>
+                                <br>
+                                <form action='delete_shift_item' method='POST'>{% csrf_token %}
+                                    <button type="submit" value="delete" class="btn btn btn-danger">削除</button>
+                                </form>
+                                </tr>
+                            </tbody>
+                            </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+</main>
+{% endblock %}

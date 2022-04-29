@@ -1,0 +1,32 @@
+{% extends 'blog/base/base.html' %}
+
+{% block main %}
+<main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
+    <div class="col-12 col-xl-8 mb-4 mb-lg-0">
+        <div class="card">
+            <h5 class="card-header"> 
+            {% for offices in office %}
+                {% if offices.id == id %}
+                {{ offices.office_name }}
+                {% endif %}
+            {% endfor %}
+            </h5>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        </thead>
+                        <tbody>
+                            <form method="POST" class="post-form">{% csrf_token %}
+                                <p>名称  {{ form.office_name }}</p>
+                                <p>所属長 {{ form.office_manager }}</p>
+                                <button type="submit" class="save btn btn-primary">保存</button>
+                            </form>
+                        </tbody>
+                        </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

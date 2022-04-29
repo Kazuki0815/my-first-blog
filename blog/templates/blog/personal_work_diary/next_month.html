@@ -1,0 +1,22 @@
+{% extends 'blog/personal_work_diary/this_month.html' %}
+
+{% block content %}
+    {% for timesheet in timesheets %}              
+        {% if timesheet.date|date:"/n" == "/5" %}
+        <tr>
+            <td>{{timesheet.date|date:"n/j"}}</td>
+            <td>{{timesheet.attendance_time}}
+            {{timesheet.leaving_work_time}}</td>
+            <td>{{timesheet.shift_name}}</td>
+            <td>代休</td>
+            <td>有給</td>
+            <td>・・</td>
+            <td>その他</td>
+            <td>食事</td>
+            <td>{{timesheet.overtime_hours}}</td>
+        </tr>
+        {% endif %}
+    {% endfor %}
+    &nbsp;&nbsp;<a href="/personal_work_diary/this_month" class="btn btn-primary">先月</a>
+    &nbsp;&nbsp;<a href="/personal_work_diary/this_month" class="btn btn-primary">翌月</a>
+{% endblock %}

@@ -41,7 +41,12 @@ INSTALLED_APPS = [
     'blog.apps.BlogConfig',
     'todoapp',
     'Timesheetapp',
-    'employee'
+    'employee',
+    'debug_toolbar',
+]
+
+INTERNAL_IPS = [
+    '127.0.0.1',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +57,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware', # Deubg tool bar
 ]
 
 ROOT_URLCONF = 'mysite.urls'

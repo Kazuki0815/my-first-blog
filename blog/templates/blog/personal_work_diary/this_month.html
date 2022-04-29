@@ -1,0 +1,63 @@
+{% extends 'blog/base/base.html' %}
+
+{% block main %}
+<main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
+    <div class="row">
+        <div class="col-12 col-xl-8 mb-4 mb-lg-0">
+            <div class="card">
+                <h5 class="card-header">今月の記録
+                  <br>
+                  {{user.manager.office_name}}
+                  {% if user.manager.full_time == True %}
+                  常勤
+                  {% elif user.manager.part_time == True %}
+                  非常勤
+                  {% endif %}
+                  <br>
+                  {{user.username}}</h5>
+                  <div class="card-body">
+                      <div class="table-responsive">
+                          <table class="table">
+                              <thead>
+                                <tr>
+                                  <th scope="col"></th>
+                                  <th scope="col">開始 終了</th>
+                                  <th scope="col">・・シフト・・</th>
+                                  <th scope="col">代休</th>
+                                  <th scope="col">有給</th>
+                                  <th scope="col">・・</th>
+                                  <th scope="col">その他</th>
+                                  <th scope="col">食事</th>
+                                  <th scope="col">超過勤務</th>
+                                </tr>
+                              </thead>
+                              <tbody border="1">
+                              {% block content %}
+                                  {% for timesheet in timesheets %}              
+                                      <tr>
+                                      {% if timesheet.date|date:"/n" == "/4" %}
+                                      <td>{{timesheet.date|date:"n/j"}}</td>
+                                      <td>{{timesheet.attendance_time}}
+                                      {{timesheet.leaving_work_time}}</td>
+                                      <td>{{timesheet.shift_name}}</td>
+                                      <td>代休</td>
+                                      <td>有給</td>
+                                      <td>・・</td>
+                                      <td>その他</td>
+                                      <td>食事</td>
+                                      <td>{{timesheet.overtime_hours}}</td>
+                                      </tr>
+                                      {% endif %}
+                                  {% endfor %}
+                                  &nbsp;&nbsp;<a href="/personal_work_diary/next_month" class="btn btn-primary">先月</a>
+                                  &nbsp;&nbsp;<a href="/personal_work_diary/next_month" class="btn btn-primary">翌月</a>
+                              {% endblock %}
+                              </tbody>
+                          </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+      </div>
+</main>
+{% endblock %}

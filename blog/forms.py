@@ -1,34 +1,41 @@
 from django import forms
-
-from .models import Post
-
-from blog.models import Timesheet,Kyoumachidei,employee,Offices
-
-class PostForm(forms.ModelForm):
-
-    class Meta:
-        model = Post
-        fields = ('title', 'text',)
-        
-
-
-class TimesheetForm(forms.ModelForm):
-
-    class Meta:
-        model = Timesheet
-        fields = ('place', 'in_out')
-        
-class KyoumachideiForm(forms.ModelForm):
-    class Meta:
-        model = Kyoumachidei
-        fields = ('shift_name', 'working_starttime','working_endtime','total_time','breakfast','lunch','dinner','office_id_test')
-        
-class employeeForm(forms.ModelForm):
-    class Meta:
-        model = employee
-        fields = ('user', 'office_name','full_time','part_time','time','no_allowance_count')
+from django.contrib.auth.models import User
+from blog.models import Offices,employee,Kyoumachidei,Timesheet
         
 class OfficesForm(forms.ModelForm):
     class Meta:
         model = Offices
-        fields = ('office_name', 'office_manager')
+        fields = ('office_name', 'office_manager') 
+    
+    def __init__(self, *args, **kwargs):
+        super(OfficesForm, self).__init__(*args, **kwargs)
+        self.fields['office_manager'] = forms.ChoiceField(
+            choices=[(o.id, str(o)) for o in User.objects.filter(manager__is_manager = 1,manager__office_name_id = self.instance.id)]
+        )
+
+
+class employeeForm(forms.ModelForm):
+    class Meta:
+        model = employee
+        fields = ('user', 'office_name','full_time','part_time','time','no_allowance_count')
+
+
+class KyoumachideiForm(forms.ModelForm):
+    class Meta:
+        model = Kyoumachidei
+        fields = ('shift_name', 'working_starttime','working_endtime','total_time','breakfast','lunch','dinner','office_id_test_2')
+
+        
+class TimesheetForm(forms.ModelForm):
+
+    class Meta:
+        model = Timesheet
+        fields = ('remarks','shift_name','overtime_hours')
+        
+    #def __init__(self, *args, **kwargs):
+    #    super(TimesheetForm, self).__init__(*args, **kwargs)
+    #    self.fields['shift_name'] = forms.TypedChoiceField(
+    #        choices=[(o.id, str(o)) for o in Kyoumachidei.objects.filter(office_id_test_2_id = 1)], coerce=int)
+            #forms.TypedChoiceField(choices=[(x, x) for x in range(1, 11)], coerce=int, help_text = 'Units: ')
+            #choices=[(o.id, str(o)) for o in Kyoumachidei.objects.filter(office_id_test_2_id = request.user.employee.office_name.id)]
+            #from urllib import request

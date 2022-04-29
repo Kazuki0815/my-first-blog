@@ -1,0 +1,19 @@
+{% extends 'blog/base/base.html' %}
+
+{% block main %}
+<main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
+    <nav aria-label="breadcrumb">
+    </nav>
+    <div class="d-grid gap-2">
+        <form action="/timecard/attendance_stamp/" method='POST' href="/timecard/work_details">{% csrf_token %}
+          <button type="submit" value="add" class="btn btn-primary btn-block btn-lg">開始</button>
+        </form>
+        <br>
+        <p>{{ attendance_time }}</p>
+      
+        <form action="#" method='POST'>{% csrf_token %}
+          <button type="submit" value="add" class="btn btn-danger btn-block btn-lg">終了</button>
+        </form>
+    </div>            
+</main>
+{% endblock %}
