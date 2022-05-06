@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'todoapp',
     'Timesheetapp',
     'employee',
-    'debug_toolbar',
+    #'debug_toolbar',
     'mathfilters',
 ]
 
