@@ -1,22 +1,26 @@
 {% extends 'blog/personal_work_diary/this_month.html' %}
 
+{% block link %}
+    <a href="/personal_work_diary/this_month" class="btn btn-lg btn-outline-primary">< 先月</a>&nbsp;&nbsp;
+    <a href="/personal_work_diary/this_month" class="btn btn-lg btn-outline-primary">翌月 ></a>
+{% endblock %}
+
 {% block content %}
     {% for timesheet in timesheets %}              
-        {% if timesheet.date|date:"/n" == "/5" %}
         <tr>
+            {% if timesheet.date|date:"/n" == "/6" %}
             <td>{{timesheet.date|date:"n/j"}}</td>
             <td>{{timesheet.attendance_time}}
             {{timesheet.leaving_work_time}}</td>
             <td>{{timesheet.shift_name}}</td>
-            <td>代休</td>
-            <td>有給</td>
-            <td>・・</td>
-            <td>その他</td>
-            <td>食事</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><a href="/personal_work_diary/{{timesheet.id}}/meal_edit" class="btn btn-sm btn-outline-secondary font-weight-bold">編集</a></td></td>
             <td>{{timesheet.overtime_hours}}</td>
+            <td><a href="/personal_work_diary/{{timesheet.id}}/timecard_edit" class="btn btn-sm btn-primary">編集</a></td>
+            {% endif %}
         </tr>
-        {% endif %}
     {% endfor %}
-    &nbsp;&nbsp;<a href="/personal_work_diary/this_month" class="btn btn-primary">先月</a>
-    &nbsp;&nbsp;<a href="/personal_work_diary/this_month" class="btn btn-primary">翌月</a>
 {% endblock %}

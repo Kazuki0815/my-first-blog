@@ -2,56 +2,65 @@
 
 {% block main %}
 <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
-  <div class="row">
-      <div class="col-12 col-xl-8 mb-4 mb-lg-0">
-          <div class="card">
-              <h5 class="card-header">ユーザー一覧</h5>
-              <div class="card-body">
-                  <div class="table-responsive">
-                      <table class="table">
-                        <thead>
-                          <tr>
-                            <th scope="col"></th>
-                            <th scope="col">開始 終了</th>
-                            <th scope="col">・・シフト・・</th>
-                            <th scope="col">代休</th>
-                            <th scope="col">有給</th>
-                            <th scope="col">・・</th>
-                            <th scope="col">その他</th>
-                            <th scope="col">食事</th>
-                            <th scope="col">超過勤務</th>
-                          </tr>
-                        </thead>
-                        {% for user in users %}
-                            {% for timesheet in timesheets %}
-                              {% if timesheet.date|date:"/n" == "/4" %}
-                                {% if id == user.id %}
-                                  {% if user == timesheet.staff %}
-                                    <tbody>
-                                      <tr> 
-                                        <td>{{timesheet.date|date:"n/j"}}</td>
-                                        <td>{{timesheet.attendance_time}}
-                                        {{timesheet.leaving_work_time}}</td>
-                                        <td>{{timesheet.shift_name}}</td>
-                                        <td>代休</td>
-                                        <td>有給</td>
-                                        <td>・・</td>
-                                        <td>その他</td>
-                                        <td>食事</td>
-                                        <td>{{timesheet.overtime_hours}}</td>
-                                      </tr>
-                                    </tbody>
-                                {% endif %}
-                              {% endif %}
-                            {% endif %}
-                          {% endfor %}
-                        {% endfor %}
-                      &nbsp;&nbsp;<a href="#" class="btn btn-primary">翌月</a>
-                      </table>
-                  </div>
-              </div>
-          </div>
+  <div class="card" style="width:60rem;">
+    <div class="card-body">
+      <div align="center">
+        <h3>
+            今月の記録&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;            
+        </h3>
       </div>
+      <h5>
+        {{user.manager.office_name}}&nbsp;
+        {% if user.manager.full_time == True %}
+        常勤
+        {% elif user.manager.part_time == True %}
+        非常勤
+        {% endif %}
+        <br>
+        {{user.username}}
+      </h5>
+      <table class="table align-middle table-striped table-bordered font-weight-bold">
+        <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">開始 終了</th>
+          <th scope="col">・・シフト・・</th>
+          <th scope="col">代休</th>
+          <th scope="col">有給</th>
+          <th scope="col">・・</th>
+          <th scope="col">その他</th>
+          <th scope="col">食事</th>
+          <th scope="col">超過勤務</th>
+          <th scope="col">残業申請</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user in users %}
+            {% for timesheet in timesheets %}
+              {% if timesheet.date|date:"/n" == "/5" %}
+                {% if id == user.id %}
+                  {% if user == timesheet.staff %}
+                      <tr> 
+                        <td>{{timesheet.date|date:"n/j"}}</td>
+                        <td>{{timesheet.attendance_time}}
+                        {{timesheet.leaving_work_time}}</td>
+                        <td>{{timesheet.shift_name}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td><a href="/manager_work_diary/{{timesheet.id}}/meal_edit" class="btn btn-sm btn-outline-secondary font-weight-bold">編集</a></td>
+                        <td>{{timesheet.overtime_hours}}</td>
+                        <td><a href="#" class="btn btn-sm btn-outline-secondary font-weight-bold">編集</a></td>
+                      </tr>
+                {% endif %}
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+        </tbody>
+      </table>
     </div>
+  </div>
 </main>
 {% endblock %}

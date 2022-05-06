@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'Timesheetapp',
     'employee',
     'debug_toolbar',
+    'mathfilters',
 ]
 
 INTERNAL_IPS = [

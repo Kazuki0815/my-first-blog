@@ -1,0 +1,36 @@
+{% extends 'blog/base/base.html' %}
+
+{% block main %}
+<main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
+    <div class="card" style="width: 40rem;">
+        <div class="card-body font-weight-bold">
+            <table class="table">
+                <h5>
+                    &nbsp;&nbsp;{{timesheet.id}}{{user.username}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    {{user.manager.office_name}}
+                </h5>
+                <br>
+                <tbody border="1">
+                    <form action="/personal_work_diary/{{timesheet.id}}/timecard_add_later" method="POST" class="post-form">{% csrf_token %}
+                        <p>&nbsp;&nbsp;日付&nbsp;&nbsp;{{ form.date }}</p>
+                        <br>
+                        <p>&nbsp;&nbsp;時間&nbsp;&nbsp;{{ form.attendance_time }} 時 ～ {{ form.leaving_work_time }} 時</p>
+                        <br>
+                        <p>&nbsp;&nbsp;合計時間&nbsp;&nbsp;{{ form.total_working_hours }} 時間</p>
+                        <br>
+                        <p>&nbsp;&nbsp;シフト&nbsp;&nbsp;{{ form.shift_name }}</p>
+                        <br><br>
+                        <p>&nbsp;&nbsp;業務内容</p>
+                        <p>&nbsp;&nbsp;{{ form.remarks }}</p>
+                        <br>
+                        <p>&nbsp;&nbsp;残業時間&nbsp;&nbsp;{{ form.overtime_hours }} 時間</p>
+                        <div align="right">
+                            <button type="submit" class="save btn btn-primary font-weight-bold">追加</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </div>
+                        </form> 
+                </tbody>
+            </table>
+        </div>
+    </div>
+<main>
+{% endblock %}

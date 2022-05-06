@@ -1,23 +1,36 @@
 {% extends 'blog/base/base.html' %}
+{% load mathfilters %}
 
 {% block main %}
 <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
-    <nav aria-label="breadcrumb">
-    </nav>
-    <div class="d-grid gap-2">
-        <form method='POST' class="post-form">{% csrf_token %}
-            <p>合計時間:保留</p>
-            <p>備考欄:{{form.remarks}}</p>
-            <p>シフト:{{form.shift_name}}</p>
-            <p>残業時間:{{form.overtime_hours}}</p>
-            <button type="submit" class="save btn btn-primary">保存</button>
-        </form>
-        {{user.manager.office_name}}
-        {% for shift_items in shift_item %}
-        {% if user.manager.office_name == shift_items.office_id_test_2 %}
-        <p>{{ shift_items.shift_name }}</p>
-        {% endif %}
-        {% endfor %}
+    <div class="card" style="width: 40rem;">
+        <div class="card-body font-weight-bold">
+            <table class="table">
+            <tbody>
+            <form method='POST' class="post-form">{% csrf_token %}
+                <!--<p>合計時間:{{timesheet.attendance_time}}</p>
+                    
+                <p>合計時間:{{timesheet.leaving_work_time}}</p>
+                <p>合計{{timesheet.leaving_work_time | sub:timesheet.attendance_time }}</p>-->
+                <p>&nbsp;&nbsp;合計&nbsp;&nbsp;8.5時間</p>
+                <div align="center">
+                    <p>備考欄</p>
+                    <p>{{form.remarks}}</p>
+                </div>
+                <p>&nbsp;&nbsp;シフト&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{form.shift_name}}</p>
+                <br>
+                <p>&nbsp;&nbsp;残業時間&nbsp;&nbsp;{{form.overtime_hours}}&nbsp;時間</p>
+                <div align="right">
+                    <button type="submit" class="save btn btn-primary font-weight-bold">保存</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </div>
+            </form>
+            <!--{{user.manager.office_name}}
+            {% for shift_items in shift_item %}
+            {% if user.manager.office_name == shift_items.office_id_test_2 %}
+            <p>{{ shift_items.shift_name }}</p>
+            {% endif %}
+            {% endfor %}-->
+        </div>
     </div>            
 </main>
 {% endblock %}

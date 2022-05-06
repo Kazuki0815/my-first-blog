@@ -2,59 +2,32 @@
 
 {% block main %}
 <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
-    <div class="row">
-        <div class="col-12 col-xl-8 mb-4 mb-lg-0">
-            <div class="card">
-                <h5 class="card-header">管理者一覧</h5>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                              <tr>
-                                <th scope="col"></th>
-                                <th scope="col"></th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              {{id}}
-                              {% for user in users %}
-                              <tr>
-                                <th>・ {{user}}</th>
-                                <td><a href="/usermanagement/{{user.id}}/employee_details" class="btn btn-sm btn-secondary">詳細</a></td>
-                                <!--<td>{% if user.employee.full_time == True %}
-                                ☑
-                                {% else %}
-                                □
-                                {% endif %}</td>
-                                <td>{% if user.employee.part_time == True %}
-                                ☑
-                                {% else %}
-                                □
-                                {% endif %}</td>
-                                <td>{{ user.employee.time }}</td>
-                                <td>{{ user.employee.office_name }}</td>
-                                <td>{% if user.employee.no_allowance_count == True %}
-                                ☑
-                                {% else %}
-                                □
-                                {% endif %}</td>
-                                <td>
-                                  {% if user.is_superuser == True %}
-                                  アドミン権限
-                                  {% elif user.is_superuser == False %}
-                                  スタッフ権限
-                                  {% else %}
-                                  その他
-                                  {% endif %}
-                                </td>-->
-                              </tr>
-                              {% endfor %}            
-                            </tbody>
-                          </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-      </div>
+  <h5>管理者一覧</h5>
+  <br>
+  <div class="card" style="width:40rem;">
+    <div class="card-body">
+      <table class="table align-middle">
+        <tbody>
+          {% for user in users %}
+              {% if user.is_staff == True %}
+                    {% if user.is_superuser == True %}
+                    
+                    {% else %}
+                    <tr>
+                      <th>&nbsp;&nbsp;・&nbsp;{{user}}</th>
+                      <td>
+                        <div align="right">
+                          <a href="/managermanagement/{{user.id}}/manager_details" class="btn btn-outline-secondary font-weight-bold">詳細</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </div>                     
+                      </td>
+                    </tr>
+                    {% endif %}
+              {% else %}
+              {% endif %}
+          {% endfor %}            
+        </tbody>
+      </table>
+    </div>
+  </div>
 </main>
 {% endblock %}

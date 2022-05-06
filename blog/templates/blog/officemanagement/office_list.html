@@ -2,34 +2,25 @@
 
 {% block main %}
 <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
-        <div class="col-12 col-xl-8 mb-4 mb-lg-0">
-            <div class="card">
-                <h5 class="card-header">事務所一覧</h5>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                
-                                <th scope="col"></th>
-                                <th scope="col"></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for office in offices %}
-                            <tr>
-                                
-                                <th>・ {{ office.office_name }}</th>
-                                <td>
-                                <a href="/officemanagement/{{ office.id }}/shift_details_page" class="btn btn-sm btn-primary">詳細</a>
-                                <a href="/officemanagement/{{ office.id }}/office_setting" class="btn btn-sm btn-primary">事務所設定</a>
-                            </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+    <h5>事務所一覧</h5>
+    <br>
+    <div class="card" style="width:40rem;">
+        <div class="card-body">
+            <table class="table align-middle">
+                <tbody>
+                {% for office in offices %}
+                <tr>
+                    <th>&nbsp;&nbsp;・&nbsp;{{ office.office_name }}</th>
+                    <td>
+                        <div align="right">
+                            <a href="/officemanagement/{{ office.id }}/shift_details_page" class="btn btn-outline-secondary font-weight-bold">詳細</a>
+                            <a href="/officemanagement/{{ office.id }}/office_setting" class="btn btn-outline-secondary font-weight-bold">事務所設定</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
 </main>

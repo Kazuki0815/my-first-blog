@@ -29,15 +29,15 @@ class employee(models.Model):#2
     def __str__(self):
         return str(self.office_name)+" : "+str(self.user)
 
-@receiver(post_save, sender=User)
-def create_user_employee(sender, instance, created, **kwargs):#確認
-    if created:
-        employee.objects.create(user=instance)
+#@receiver(post_save, sender=User)
+#def create_user_employee(sender, instance, created, **kwargs):#確認
+#    if created:
+#        employee.objects.create(user=instance)
 
-@receiver(post_save, sender=User)
-def save_user_employee(sender, instance, **kwargs):#確認
+#@receiver(post_save, sender=User)
+#def save_user_employee(sender, instance, **kwargs):#確認
     #instance.employee.save()
-    instance.manager.save()
+#    instance.manager.save()
 
 #シフト
 class Kyoumachidei(models.Model):#4
@@ -63,11 +63,17 @@ class Timesheet(models.Model):#9
     office_name = models.ForeignKey(Offices,on_delete=models.CASCADE,verbose_name='事業所',default=None,blank=True,null=True)#office
     attendance_time = models.TimeField(verbose_name="出勤時間",default=None,blank=True,null=True)
     leaving_work_time = models.TimeField(verbose_name="退勤時間",default=None,blank=True,null=True)
-    date = models.DateField(verbose_name='日付')
+    date = models.DateField(verbose_name='日付',default=None,blank=True,null=True)
     remarks = models.TextField(verbose_name='備考欄',default=None,blank=True,null=True)
     overtime_hours = models.DecimalField(verbose_name='残業時間',max_digits=5,decimal_places=2,default=None,blank=True,null=True)
     shift_name = models.ForeignKey(Kyoumachidei, verbose_name="シフト選択", on_delete=models.CASCADE, default=None,blank=True,null=True)#shift
-    
+    is_breakfast = models.BooleanField(verbose_name='朝食',default=False)
+    is_lunch = models.BooleanField(verbose_name='昼食',default=False)
+    is_dinner = models.BooleanField(verbose_name='夕食',default=False)
+    total_working_hours = models.TimeField(verbose_name="合計勤務時間",default=None,blank=True,null=True)
+    general_affairs_entry_field = models.TextField(verbose_name='総務記入欄',max_length=400,default=None,blank=True,null=True)
+    remarks_time = models.TimeField(verbose_name="備考時間",default=None,blank=True,null=True)
+        
     def __str__(self):
         return str(self.office_name)+" : "+str(self.staff)
     

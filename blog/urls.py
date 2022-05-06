@@ -6,7 +6,7 @@ urlpatterns = [
     #ログイン
     path('login/', views.login),
     path('accounts/', include('django.contrib.auth.urls')),
-    
+    path('account_logout/', views.account_logout),
     #ダッシュボード
     path('', views.index),
     
@@ -20,6 +20,8 @@ urlpatterns = [
     
     #管理者管理
     path('managermanagement/manager_list',views.manager_list), 
+    path('managermanagement/<int:id>/manager_details',views.manager_details),
+    path("manager_details/<int:id>/",views.general_affairs_entry_field),
     
     #従業員管理
     path('usermanagement/employee_list',views.employee_list),
@@ -35,10 +37,15 @@ urlpatterns = [
     #勤務日誌個人
     path('personal_work_diary/this_month',views.this_month_work_diary),
     path('personal_work_diary/next_month',views.next_month_work_diary),
+    path('personal_work_diary/timecard_add_page',views.timecard_add_page),
+    path('personal_work_diary/<int:id>/timecard_add_later',views.timecard_add_later),
+    path('personal_work_diary/<int:id>/timecard_edit',views.timecard_edit),
+    path('personal_work_diary/<int:id>/meal_edit',views.meal_edit),
     
     #勤務日誌管理者
     path('manager_work_diary/work_diary_list', views.work_diary_list),
     path('manager_work_diary/<int:id>/work_diary_details', views.work_diary_details),
+    path('manager_work_diary/<int:id>/meal_edit',views.meal_edit_manager),
     
     #削除予定
     path('Workmanagement/', views.Workmanagement),

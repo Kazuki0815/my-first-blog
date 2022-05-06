@@ -17,7 +17,7 @@
                         <thead>
                         </thead>
                         <tbody>
-                            <form class="post-form">{% csrf_token %}
+                            <form method='POST' class="post-form">{% csrf_token %}
                                 <p>{{ form.user }}</p>
                                 <p>{{ form.office_name }}</p>
                                 <p>{{ form.full_time }}</p>

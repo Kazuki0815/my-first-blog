@@ -2,18 +2,18 @@
 
 {% block main %}
 <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
-    <nav aria-label="breadcrumb">
-    </nav>
-    <div class="d-grid gap-2">
+    <div class="d-grid gap-2" style="width:12rem;">
         <form action="/timecard/attendance_stamp/" method='POST' href="/timecard/work_details">{% csrf_token %}
-          <button type="submit" value="add" class="btn btn-primary btn-block btn-lg">開始</button>
+          <button type="submit" value="add" class="btn btn-secondary  btn-block btn-lg">開始</button>
         </form>
         <br>
-        <p>{{ ts.attendance_time }}</p>
-
-        <form action="/timecard/leave_work_stamp/{{ts.id}}/" method='POST'>{% csrf_token %}
+        <form action="/timecard/leave_work_stamp/{{id}}/" method='POST'>{% csrf_token %}
           <button type="submit" value="add" class="btn btn-danger btn-block btn-lg">終了</button>
+          <div style="width:24rem;" align="right">
+            <h1>{{ timesheet.attendance_time }}</h1>
+          </div>
         </form>
-    </div>            
+        <br>
+    </div>
 </main>
 {% endblock %}

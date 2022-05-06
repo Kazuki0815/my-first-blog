@@ -25,13 +25,13 @@ class KyoumachideiForm(forms.ModelForm):
         model = Kyoumachidei
         fields = ('shift_name', 'working_starttime','working_endtime','total_time','breakfast','lunch','dinner','office_id_test_2')
 
-        
+
 class TimesheetForm(forms.ModelForm):
 
     class Meta:
         model = Timesheet
-        fields = ('remarks','shift_name','overtime_hours')
-        
+        fields = ('attendance_time','leaving_work_time','date','remarks','shift_name','overtime_hours','total_working_hours')
+          
     #def __init__(self, *args, **kwargs):
     #    super(TimesheetForm, self).__init__(*args, **kwargs)
     #    self.fields['shift_name'] = forms.TypedChoiceField(
@@ -39,3 +39,18 @@ class TimesheetForm(forms.ModelForm):
             #forms.TypedChoiceField(choices=[(x, x) for x in range(1, 11)], coerce=int, help_text = 'Units: ')
             #choices=[(o.id, str(o)) for o in Kyoumachidei.objects.filter(office_id_test_2_id = request.user.employee.office_name.id)]
             #from urllib import request
+
+class MealForm(forms.ModelForm):
+
+    class Meta:
+        model = Timesheet
+        fields = ('is_breakfast','is_lunch','is_dinner')
+        
+        
+class RecordForm(forms.ModelForm):
+    class Meta:
+        model = Timesheet
+        fields = ('general_affairs_entry_field',)
+        widgets = {
+            'general_affairs_entry_field': forms.Textarea(attrs={'rows':1, 'cols':15}),
+        }

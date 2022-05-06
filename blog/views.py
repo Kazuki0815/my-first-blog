@@ -1,13 +1,12 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render,redirect
 from .models import Offices,employee,Timesheet,Kyoumachidei
-from .forms import KyoumachideiForm, TimesheetForm,employeeForm,OfficesForm
+from .forms import KyoumachideiForm, TimesheetForm,employeeForm,OfficesForm,MealForm,RecordForm
 from datetime import datetime
 from django.utils import timezone
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model,logout
 from django.contrib.auth.models import User
 from django.shortcuts import  get_object_or_404
-
 from django.urls import reverse
 from urllib.parse import urlencode
 
@@ -15,9 +14,18 @@ from urllib.parse import urlencode
 def login(request):
     return render(request, 'five/index.html', {})
 
+#ログアウト
+def account_logout(request):
+    logout(request)
+    return HttpResponseRedirect('/accounts/login/')
+   
+   
 #ダッシュボード
 def index(request):
-    return render(request, 'blog/index/index.html', {})
+    if request.user.is_authenticated:
+        return render(request, 'blog/index/index.html', {})
+    else:
+        return HttpResponseRedirect('/accounts/login/')
 
 
 #事業所管理
@@ -43,7 +51,7 @@ def shift_details_setteing(request,id):
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
-            return redirect('/Officemanagement/'+str(post.office_id_test_2.id)+'/shift_details_page')#p
+            return redirect('/officemanagement/'+str(post.office_id_test_2.id)+'/shift_details_page')#p
     else:
         form = KyoumachideiForm(instance=post)#p
     context = {
@@ -90,6 +98,7 @@ def office_setting(request,id):
     }
     return render(request, 'blog/officemanagement/office_setting.html',context)
 
+
 #管理者管理
 def manager_list(request):
     users = User.objects.all()
@@ -97,6 +106,30 @@ def manager_list(request):
         'users':users,
     }
     return render(request, 'blog/managermanagement/manager_list.html',context)
+
+def manager_details(request,id):#id
+    user = User.objects.get(pk=id)
+    timesheets = Timesheet.objects.filter(staff=user)
+    form = RecordForm()
+    context = {
+        'timesheets':timesheets,
+        'id':id,
+        'form':form,
+        'user':user,
+    }
+    return render(request, 'blog/managermanagement/manager_details.html',context)
+
+def general_affairs_entry_field(request,id):
+    timesheets = Timesheet.objects.get(pk=id)
+    if request.method == "POST":
+        form = RecordForm(request.POST,instance=timesheets)
+        timesheets = form.save(commit=False)
+        timesheets.save()
+        return redirect('/managermanagement/'+str(timesheets.staff.id)+'/manager_details')
+    else:
+        form = RecordForm(instance=timesheets)
+        return redirect('/managermanagement/'+str(timesheets.staff.id)+'/manager_details')
+
 
 #従業員管理
 def employee_list(request):
@@ -107,18 +140,26 @@ def employee_list(request):
     return render(request, 'blog/usermanagement/employee_list.html',context)
 
 def employee_details(request,id):#確認#Uersでまわし、requests.user.managerでとる
-    #post = get_object_or_404(User, pk=id)
-    post = User.objects.filter(manager__is_manager = 1,pk=id)
-    #post = User.objects.filter(manager__is_manager = 1,pk=id)
+    #users = User.objects.filter(pk=1)
+    #for user in users:
+    #   if user == request.user.manager.user:
+    #       print("aa")
+    #post = user1.manager.get(pk=id)
+    #post = get_object_or_404(User,pk=id)
+    #post = User.objects.filter(User.manager,pk=id),(manager__is_manager = 1,pk=id)
+    #post = users.manager
+    post = User.objects.select_related('manager').get(pk=id)
+    #post = request.POST.copy() # to make it mutable
+    #request.POST = post
     if request.method == "POST":
         form = employeeForm(request.POST,instance=post)#p
+        print("aa")
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
             return redirect('/usermanagement/employee_list')
     else:
-        form = employeeForm(request.POST)#p
-        print("aa")
+        form = employeeForm(request.POST,instance=post)#p
     context = {
         'id':id,
         'form':form,
@@ -128,22 +169,17 @@ def employee_details(request,id):#確認#Uersでまわし、requests.user.manage
 
 #タイムカード
 def timecard(request):
-    #timesheet=  Timesheet.objects.get(pk=595)
-    #if timesheet.leaving_work_time == None:
-    #    context = {
-    #        'ts':timesheet,
-    #        'id':595,
-    #    }
-    #    return HttpResponseRedirect("/timecard/"+str(595)+"/",context)
-    #tm = Timesheet.objects.filter(date=datetime.now().date())
-    context = {
-        #'tm': tm,
-    }
-    return render(request, 'blog/timecard/punch_in.html',context)
+    try:
+        ts =  Timesheet.objects.get(staff=request.user,leaving_work_time=None)
+        return redirect("/timecard/"+str(ts.id)+"/")
+    except:
+        return render(request, 'blog/timecard/punch_in.html')
 
 def timecard_in(request,id):
+    timesheet = Timesheet.objects.get(pk=id)
     context = {
         'id':id,
+        'timesheet':timesheet,
     }
     return render(request, 'blog/timecard/punch_out.html',context)
 
@@ -161,15 +197,9 @@ def attendance_stamp(request):
     ts.date=datetime.now().date()
     ts.attendance_time=datetime.now().time()
     ts.save()
-    
-    context = {
-        'ts':ts,
-    }
-    #return HttpResponseRedirect("/timecard/"+str(ts.id)+"/",context)
-    return render(request, 'blog/timecard/punch_out.html', context)
 
-    #return HttpResponseRedirect("/timecard/work_details/"+str(ts.id)+"/",context)
-    #return HttpResponseRedirect("/timecard/work_details/{{ts.id}}/",context)
+    return redirect("/timecard/"+str(ts.id)+"/")
+    #return render(request, 'blog/timecard/punch_out.html', context)
 
 def leave_work_stamp(request,id):
     timesheet = Timesheet.objects.get(pk=id)
@@ -194,39 +224,6 @@ def leave_work_stamp(request,id):
         'id':'id',
     } 
     return HttpResponseRedirect("/timecard/work_details/"+str(id)+"/",context)
-    #dbに追加
-    #ts = Timesheet()
-    #ts.staff = request.user
-    ##ts.place="1"
-    #office = Offices.objects.all()
-    #for offices in office:
-    #    if offices == request.user.manager.office_name:
-    #        workplace = offices
-    #    else:
-    #        print("例外")
-    #ts.office_name = workplace
-    #ts.henkou="0"#
-    #ts.time=datetime.now().time()
-    #ts.date=datetime.now().date()
-    #ts.attendance_time=datetime.now().time()
-    #ts.leave_work_time=datetime.now().time()
-    #ts.save()
-    
-    #画面に表示
-    #now = datetime.now()
-    #hour = now.hour
-    #minute = now.minute
-    
-    #leave_work_time = str(hour) + ":" + str(minute)
-    #context = {
-    #    'leave_work_time': leave_work_time,
-    #    'ts':ts,
-    #}
-    ##return HttpResponseRedirect("/timecard/work_details/"+str(timesheet.id)+"/",context)
-    
-    
-    
-    #return render(request, 'blog/timecard/work_details.html',context)
 
 
 def work_details(request,id):
@@ -241,12 +238,14 @@ def work_details(request,id):
         print( repr(request.POST) )
         if form.is_valid():
             timesheet = form.save(commit=False)
+            #timesheet.total_working_hours = timesheet.leaving_work_time - timesheet.attendance_time
             timesheet.save()
             return redirect('/timecard/')
     else:
         form = TimesheetForm(instance=timesheet)
     context = {
         'form':form,
+        'timesheet':timesheet,
     } 
     return render(request, 'blog/timecard/work_details.html',context)
 
@@ -265,6 +264,72 @@ def next_month_work_diary(request):
     }
     return render(request, 'blog/personal_work_diary/next_month.html',context)
 
+def timecard_add_page(request):
+    form = TimesheetForm()
+    timesheet = Timesheet()
+    timesheet.staff = request.user
+    office = Offices.objects.all()
+    for offices in office:
+        if offices == request.user.manager.office_name:
+            workplace = offices
+        else:
+            print("例外")
+    timesheet.office_name = workplace
+    timesheet.save()
+    
+    context = {
+    'form':form,
+    'timesheet':timesheet,
+    }
+    #return HttpResponseRedirect("/timecard/work_details/"+str(ts.id)+"/",context)
+    return render(request, 'blog/personal_work_diary/timecard_add_page.html',context)
+
+def timecard_add_later(request,id):
+    timesheet = Timesheet.objects.get(pk=id)
+    if request.method == "POST":
+        form = TimesheetForm(request.POST,instance=timesheet)
+        if form.is_valid():
+            timesheet = form.save(commit=False)
+            timesheet.save()
+            return redirect("/personal_work_diary/this_month")
+    else:
+        form = TimesheetForm(instance=timesheet)
+
+    return redirect("/personal_work_diary/this_month")
+
+def timecard_edit(request,id):
+    timesheet = get_object_or_404(Timesheet,pk=id)
+    if request.method == "POST":
+        form = TimesheetForm(request.POST,instance=timesheet)
+        if form.is_valid():
+            timesheet = form.save(commit=False)
+            timesheet.save()
+            return redirect("/personal_work_diary/this_month")
+    else:
+        form = TimesheetForm(instance=timesheet)
+    
+    context = {
+    'form':form,
+    }
+    return render(request, 'blog/personal_work_diary/timecard_edit.html',context)
+
+def meal_edit(request,id):
+    timesheet = get_object_or_404(Timesheet,pk=id)
+    if request.method == "POST":
+        form = MealForm(request.POST,instance=timesheet)
+        if form.is_valid():
+            timesheet = form.save(commit=False)
+            timesheet.save()
+            return redirect("/personal_work_diary/this_month")
+    else:
+        form = MealForm(instance=timesheet)
+    
+    context = {
+    'form':form,
+    'timesheet':timesheet,
+    }
+    return render(request, 'blog/personal_work_diary/meal_edit.html',context)
+
 
 #勤務日誌管理者
 def work_diary_list(request):
@@ -275,14 +340,33 @@ def work_diary_list(request):
     return render(request, 'blog/manager_work_diary/work_diary_list.html',context)
 
 def work_diary_details(request,id):
+    user = User.objects.get(pk=id)
     timesheets = Timesheet.objects.all()
     users = User.objects.all()
     context = {
         'users':users,
         'timesheets': timesheets,
         'id':id,
+        'user':user,
     }
     return render(request, 'blog/manager_work_diary/work_diary_details.html',context)
+
+def meal_edit_manager(request,id):
+    timesheet = get_object_or_404(Timesheet,pk=id)
+    if request.method == "POST":
+        form = MealForm(request.POST,instance=timesheet)
+        if form.is_valid():
+            timesheet = form.save(commit=False)
+            timesheet.save()
+            return redirect("/manager_work_diary/"+str(timesheet.staff_id)+"/work_diary_details")
+    else:
+        form = MealForm(instance=timesheet)
+    
+    context = {
+    'form':form,
+    'timesheet':timesheet,
+    }
+    return render(request, 'blog/personal_work_diary/meal_edit.html',context)
 
 
 #削除予定

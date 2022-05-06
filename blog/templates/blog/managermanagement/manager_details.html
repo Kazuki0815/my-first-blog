@@ -1,0 +1,53 @@
+{% extends 'blog/base/base.html' %}
+
+{% block main %}
+<main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
+  <div class="card" style="width:60rem;">
+    <div class="card-body">
+      <h5>{{user.username}}&nbsp;{{user.manager.office_name}}事業所</h5>
+      <br>
+      <table class="table align-middle table-striped table-bordered font-weight-bold">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">開始</th>
+            <th scope="col">終了</th>
+            <th scope="col">合計時間</th>
+            <th scope="col">残業時間</th>
+            <th scope="col">備考時間</th>
+            <th scope="col">総務記入欄</th>
+          </tr>
+        </thead>  
+        <tbody>
+          {% block content %}
+              {% for timesheet in timesheets %}              
+                  <tr>
+                  {% if timesheet.date|date:"/n" == "/5" %}
+                  <td>{{timesheet.date|date:"n/j"}}</td>
+                  <td>{{timesheet.attendance_time}}</td>
+                  <td>{{timesheet.leaving_work_time}}</td>
+                  <td>制作中</td>
+                  <td>{{timesheet.overtime_hours}}</td>
+                  {% if timesheet.remarks_time %}
+                  <td>{{ timesheet.remarks_time }}</td>
+                  {% else %}
+                  <td></td>
+                  {% endif %}
+                  <form action = "/manager_details/{{timesheet.id}}/" method='POST' class="post-form">{% csrf_token %}
+                    <td>
+                      {{form.general_affairs_entry_field}}
+                      <div align="right">
+                        <a type="submit" class="btn btn-sm btn-outline-primary font-weight-bold">保存</a>&nbsp;&nbsp;
+                    </td>
+                    </form>
+                  <!--<td>{{timesheet.general_affairs_entry_field}}</td>確認用-->
+                </tr>
+                  {% endif %}
+              {% endfor %}
+          {% endblock %}
+          </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+{% endblock %}
