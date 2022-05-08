@@ -1,8 +1,16 @@
 {% extends "five/base.html" %}
+
 {% block content %}
-<form method="post">
-{% csrf_token %}
-{{ form.as_p }}
-<button type="submit" class="btn btn-primary">ログイン</button>
-</form>
+<div class="card-body font-weight-bold">
+    <table class="table align-middle">
+        <tbody>
+        <form method="post">{% csrf_token %}<br><br><br><br><br><br><br><br><br><br><br>
+            <p>ユーザー名 {{ form.username }}</p>
+            <p>パスワード {{ form.password }}</p>
+            <br>
+            <button type="submit" class="btn btn-primary" style="width:15.5rem;">ログインする</button>
+        </form>
+        </tbody>
+    </table>
+</div>
 {% endblock %}

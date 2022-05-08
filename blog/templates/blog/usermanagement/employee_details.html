@@ -2,34 +2,21 @@
 
 {% block main %}
 <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
-    <div class="col-12 col-xl-8 mb-4 mb-lg-0">
-        <div class="card">
-            <h5 class="card-header">
-            {% for user in users %}
-                {% if user.id == id %}
-                {{ user }}
-                {% endif %}
-            {% endfor %}
-            </h5>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                        </thead>
-                        <tbody>
-                            <form method='POST' class="post-form">{% csrf_token %}
-                                <p>{{ form.user }}</p>
-                                <p>{{ form.office_name }}</p>
-                                <p>{{ form.full_time }}</p>
-                                <p>{{ form.part_time }}</p>
-                                <p>{{ form.time }}</p>
-                                <p>{{ form.no_allowance_count }}</p>
-                                <button type="submit" class="save btn btn-primary">保存</button>
-                            </form>
-                        </tbody>
-                      </table>
-                </div>
-            </div>
+    <div class="card" style="width: 40rem;">
+        <div class="card-body font-weight-bold">
+            <table class="table">
+                <tbody>
+                    <form method='POST' class="post-form">{% csrf_token %}<br>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;氏名&nbsp;&nbsp;{{ form.user }}</p><br>
+                        <p>&nbsp;&nbsp;{{ form.full_time }}&nbsp;&nbsp;常勤&nbsp;&nbsp;&nbsp;&nbsp;{{ form.part_time }}&nbsp;&nbsp;非常勤&nbsp;&nbsp;&nbsp;&nbsp;{{ form.time }}&nbsp;時間</p><br>
+                        <p>&nbsp;&nbsp;所属事務所&nbsp;&nbsp;{{ form.office_name }}</p><br>
+                        <p>&nbsp;&nbsp;{{ form.no_allowance_count }}&nbsp;&nbsp;手当カウントしない</p>
+                        <div align="right">
+                            <button type="submit" class="save btn btn-primary">保存</button>&nbsp;&nbsp;
+                        </div>
+                    </form>
+                </tbody>
+            </table>
         </div>
     </div>
 </main>

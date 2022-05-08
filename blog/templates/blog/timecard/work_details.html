@@ -1,5 +1,5 @@
 {% extends 'blog/base/base.html' %}
-{% load mathfilters %}
+
 
 {% block main %}
 <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
@@ -8,11 +8,7 @@
             <table class="table">
             <tbody>
             <form method='POST' class="post-form">{% csrf_token %}
-                <!--<p>合計時間:{{timesheet.attendance_time}}</p>
-                    
-                <p>合計時間:{{timesheet.leaving_work_time}}</p>
-                <p>合計{{timesheet.leaving_work_time | sub:timesheet.attendance_time }}</p>-->
-                <p>&nbsp;&nbsp;合計&nbsp;&nbsp;8.5時間</p>
+                <p>&nbsp;&nbsp;合計&nbsp;&nbsp;{{timesheet.total_working_hours}}時間</p>
                 <div align="center">
                     <p>備考欄</p>
                     <p>{{form.remarks}}</p>

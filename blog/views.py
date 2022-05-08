@@ -139,30 +139,23 @@ def employee_list(request):
     }
     return render(request, 'blog/usermanagement/employee_list.html',context)
 
-def employee_details(request,id):#確認#Uersでまわし、requests.user.managerでとる
-    #users = User.objects.filter(pk=1)
-    #for user in users:
-    #   if user == request.user.manager.user:
-    #       print("aa")
-    #post = user1.manager.get(pk=id)
-    #post = get_object_or_404(User,pk=id)
-    #post = User.objects.filter(User.manager,pk=id),(manager__is_manager = 1,pk=id)
-    #post = users.manager
-    post = User.objects.select_related('manager').get(pk=id)
-    #post = request.POST.copy() # to make it mutable
-    #request.POST = post
+def employee_details(request,id):
+    users = User.objects.get(pk=id)
+    post = users.manager    
+    #post = get_object_or_404(User.objects.select_related('manager'),pk=id)
+    print(post)
     if request.method == "POST":
         form = employeeForm(request.POST,instance=post)#p
-        print("aa")
         if form.is_valid():
             post = form.save(commit=False)
             post.save()
             return redirect('/usermanagement/employee_list')
     else:
-        form = employeeForm(request.POST,instance=post)#p
+        form = employeeForm(instance=post)#p
     context = {
         'id':id,
         'form':form,
+        'users':users,
     }
     return render(request, 'blog/usermanagement/employee_details.html',context)
     
@@ -214,6 +207,9 @@ def leave_work_stamp(request,id):
         if form.is_valid():
             timesheet = form.save(commit=False)
             timesheet.leaving_work_time=datetime.now().time()
+            date = datetime.now().date()
+            total_working_hours = datetime.combine(date, timesheet.leaving_work_time) - datetime.combine(date, timesheet.attendance_time)
+            timesheet.total_working_hours = str(total_working_hours)
             timesheet.save()
             #return redirect('/timecard/')
     else:
@@ -238,7 +234,6 @@ def work_details(request,id):
         print( repr(request.POST) )
         if form.is_valid():
             timesheet = form.save(commit=False)
-            #timesheet.total_working_hours = timesheet.leaving_work_time - timesheet.attendance_time
             timesheet.save()
             return redirect('/timecard/')
     else:

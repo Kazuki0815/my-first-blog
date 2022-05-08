@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from blog.models import Offices,employee,Kyoumachidei,Timesheet
-        
+
 class OfficesForm(forms.ModelForm):
     class Meta:
         model = Offices
@@ -33,9 +33,9 @@ class TimesheetForm(forms.ModelForm):
         fields = ('attendance_time','leaving_work_time','date','remarks','shift_name','overtime_hours','total_working_hours')
           
     #def __init__(self, *args, **kwargs):
-    #    super(TimesheetForm, self).__init__(*args, **kwargs)
-    #    self.fields['shift_name'] = forms.TypedChoiceField(
-    #        choices=[(o.id, str(o)) for o in Kyoumachidei.objects.filter(office_id_test_2_id = 1)], coerce=int)
+        #super(TimesheetForm, self).__init__(*args, **kwargs)
+        #self.fields['shift_name'] = forms.TypedChoiceField(
+            #choices=[(o.id, str(o)) for o in Kyoumachidei.objects.filter(office_id_test_2_id = 1)], coerce=int)
             #forms.TypedChoiceField(choices=[(x, x) for x in range(1, 11)], coerce=int, help_text = 'Units: ')
             #choices=[(o.id, str(o)) for o in Kyoumachidei.objects.filter(office_id_test_2_id = request.user.employee.office_name.id)]
             #from urllib import request
